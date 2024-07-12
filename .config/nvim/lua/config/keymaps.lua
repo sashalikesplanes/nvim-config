@@ -48,10 +48,23 @@ vim.keymap.set("n", "<S-tab>", ":bprevious<CR>", { desc = "Previous Buffer" })
 
 -- Close buffer with <leader>q
 vim.keymap.set("n", "<leader>q", ":bdelete<CR>", { desc = "Close Buffer" })
-vim.keymap.set("n", "<C-h>", ":NvimTmuxNavigateLeft<CR>", { desc = "Navigate [L]eft" })
-vim.keymap.set("n", "<C-j>", ":NvimTmuxNavigateDown<CR>", { desc = "Navigate [D]own" })
-vim.keymap.set("n", "<C-k>", ":NvimTmuxNavigateUp<CR>", { desc = "Navigate [U]p" })
-vim.keymap.set("n", "<C-l>", ":NvimTmuxNavigateRight<CR>", { desc = "Navigate [R]ight" })
+
+if vim.g.vscode then
+  vim.keymap.set("n", "<C-w>|", ":vsp<CR>")
+  vim.keymap.set("x", "<C-w>|", ":vsp<CR>")
+  vim.keymap.set("n", "<C-w>-", ":sp<CR>")
+  vim.keymap.set("x", "<C-w>-", ":sp<CR>")
+  vim.keymap.set("n", "<leader>cr", "<Cmd>call VSCodeNotify('editor.action.rename')<CR>")
+  vim.keymap.set("n", "<leader>ca", "<Cmd>call VSCodeNotify('editor.action.quickFix')<CR>")
+  vim.keymap.set("n", "<leader>gr", "<Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>")
+  vim.keymap.set("n", "<leader>xx", "<Cmd>call VSCodeNotify('workbench.action.problems.focus')<CR>")
+else
+  vim.keymap.set("n", "<C-h>", ":NvimTmuxNavigateLeft<CR>", { desc = "Navigate [L]eft" })
+  vim.keymap.set("n", "<C-j>", ":NvimTmuxNavigateDown<CR>", { desc = "Navigate [D]own" })
+  vim.keymap.set("n", "<C-k>", ":NvimTmuxNavigateUp<CR>", { desc = "Navigate [U]p" })
+  vim.keymap.set("n", "<C-l>", ":NvimTmuxNavigateRight<CR>", { desc = "Navigate [R]ight" })
+end
+
 vim.keymap.set("n", "<leader>gg", ":Git<cr>", { desc = "Open [G]it" })
 vim.keymap.set("n", "<leader><space>", function()
   require("telescope.builtin").find_files({
